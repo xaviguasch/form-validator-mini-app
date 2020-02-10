@@ -1,0 +1,23 @@
+{
+  "name": "form-validator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xaviguasch/form-validator-mini-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xaviguasch/form-validator-mini-app/issues"
+  },
+  "homepage": "https://github.com/xaviguasch/form-validator-mini-app#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0"
+  }
+}
