@@ -23,11 +23,22 @@ const showSuccess = input => {
 }
 
 // Check if email is valid
-const isValidEmail = email => {
+const checkEmail = input => {
   // eslint-disable-next-line no-useless-escape
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-  return re.test(String(email).toLowerCase())
+  if (re.test(input.value.trim())) {
+    showSuccess(input)
+  } else {
+    showError(input, 'Email is not valid')
+  }
+}
+
+// Check passwords match
+const checkPasswordsMatch = (input1, input2) => {
+  if (input1.value !== input2.value) {
+    showError(input2, 'Passwords do not match')
+  }
 }
 
 // Get fieldname
@@ -46,35 +57,23 @@ const checkRequired = inputArr => {
   })
 }
 
+// Check input length
+const checkLength = (input, min, max) => {
+  if (input.value.length >= min && input.value.length <= max) {
+    showSuccess(input)
+  } else {
+    showError(input, `${getFieldName(input)} has be between ${min} and ${max} characters`)
+  }
+}
+
 // Event listeners
 form.addEventListener('submit', function(e) {
   e.preventDefault()
 
   checkRequired([username, email, password, password2])
 
-  // if (username.value === '') {
-  //   showError(username, 'Username is required')
-  // } else {
-  //   showSuccess(username)
-  // }
-
-  // if (email.value === '') {
-  //   showError(email, 'email is required')
-  // } else if (!isValidEmail(email.value)) {
-  //   showError(email, 'email is not valid')
-  // } else {
-  //   showSuccess(email)
-  // }
-
-  // if (password.value === '') {
-  //   showError(password, 'password is required')
-  // } else {
-  //   showSuccess(password)
-  // }
-
-  // if (password2.value === '') {
-  //   showError(password2, 'password2 is required')
-  // } else {
-  //   showSuccess(password2)
-  // }
+  checkLength(username, 3, 15)
+  checkLength(password, 6, 25)
+  checkEmail(email)
+  checkPasswordsMatch(password, password2)
 })
